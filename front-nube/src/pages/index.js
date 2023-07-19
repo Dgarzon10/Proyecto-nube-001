@@ -7,21 +7,6 @@ const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [content, setContent] = useState("");
 
-  const handleSubmit = async (content) => {
-    console.log(content);
-    const response = await fetch("http://localhost:3001/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: { content },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-    }
-  };
-
   useEffect(() => {
     const getTasks = async () => {
       const response = await fetch("http://localhost:3001/");
@@ -30,7 +15,7 @@ const Home = () => {
       }
     };
     getTasks().catch(console.error);
-  }, []);
+  }, [tasks]);
 
   return (
     <div className=" w-full flex justify-center font-sans">
@@ -43,7 +28,7 @@ const Home = () => {
               placeholder="Ex: Do the dishes..."
               onChange={(e) => setContent(e.target.value)}
             />
-            <ButtonAdd handleSubmit={handleSubmit} content={content} />
+            <ButtonAdd content={content} />
             {/* <button
               className="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal-500"
               onClick={handleSubmit}

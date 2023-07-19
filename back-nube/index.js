@@ -22,9 +22,9 @@ app.get("/", async (req, res) => {
 });
 
 // Crear un nuevo producto
-app.post("/", async (req, res) => {
+app.post("/:content", async (req, res) => {
   try {
-    const { content } = req.body;
+    const { content } = req.params;
     const done = false;
     const newTask = await pool.query(
       "INSERT INTO tasks (content, done) VALUES ($1, $2) RETURNING *",
@@ -36,6 +36,7 @@ app.post("/", async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
 // Actualizar un producto por su ID
 app.put("/:id", async (req, res) => {
   try {

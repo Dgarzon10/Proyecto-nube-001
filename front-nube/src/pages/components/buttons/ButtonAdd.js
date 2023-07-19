@@ -1,4 +1,13 @@
-const ButtonAdd = ({ handleSubmit, content }) => {
+const ButtonAdd = ({ content }) => {
+  const handleSubmit = async (content) => {
+    const response = await fetch(`http://localhost:3001/${content}`, {
+      method: "POST",
+    });
+    if (response.ok) {
+      const data = await response.json();
+    }
+  };
+
   return (
     <button
       onClick={() => handleSubmit(content)}

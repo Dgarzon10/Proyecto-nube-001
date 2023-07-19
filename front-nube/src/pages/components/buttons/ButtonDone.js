@@ -14,11 +14,12 @@
 //   );
 // };
 
-const ButtonDone = ({ done }) => {
+const ButtonDone = ({ done, onClick, id }) => {
   return done ? (
     <></>
   ) : (
     <button
+      onClick={() => onClick(id)}
       className={`p-2 mr-2 font-medium hover:text-white shadow rounded text-green-600 hover:bg-green-600
            `}
     >

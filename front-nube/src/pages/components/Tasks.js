@@ -3,10 +3,23 @@ import ButtonDone from "./buttons/ButtonDone";
 import ButtonRemove from "./buttons/ButtonRemove";
 useState;
 const Tasks = ({ children, done = false, id }) => {
-  function taskDone(id) {}
+  const taskDone = async (id) => {
+    const response = await fetch(`http://localhost:3001/${id}`, {
+      method: "PUT",
+    });
+    if (response.ok) {
+      const data = await response.json();
+    }
+  };
 
-  function removeTask(id) {}
-  const onClick = "";
+  const removeTask = async (id) => {
+    const response = await fetch(`http://localhost:3001/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      const data = await response.json();
+    }
+  };
   return (
     <>
       <div className="flex w-full border-t-2 border-green-100 py-2  items-center">
@@ -17,8 +30,8 @@ const Tasks = ({ children, done = false, id }) => {
         >
           {children}
         </p>
-        <ButtonDone done={done} onClick={taskDone} />
-        <ButtonRemove onClick={removeTask} />
+        <ButtonDone done={done} id={id} onClick={taskDone} />
+        <ButtonRemove id={id} onClick={removeTask} />
       </div>
     </>
   );
