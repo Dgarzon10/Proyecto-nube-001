@@ -4,28 +4,30 @@ import ButtonAdd from "./components/buttons/ButtonAdd";
 import { useEffect } from "react";
 
 const Home = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [tasks, setTasks] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async ({data}) => {
+  //   e.preventDefault();
+  //   const response = await fetch("http://localhost:3001/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: ,
+  //   });
+  //   if (res.ok) {
+  //     const data = await response.json();
+  //     console.log("FUNCIONA");
+  //   }
+  // };
 
-    // const response = await fetch('http://localhost:3001/', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ name, email }),
-    // });
-    const res = await fetch("http://localhost:3001/");
-
-    if (res.ok) {
-      // const data = await response.json();
-
+  useEffect(() => {
+    const response = fetch("http://localhost:3001/");
+    if (response.ok) {
+      setTasks(response.json());
       console.log("FUNCIONA");
     }
-  };
-  // const [tasks, setTasks] = useState([])
+  }, []);
   const tasks = [
     { id: 1, content: "tender la cama", done: false },
     { id: 2, content: "tender la cama", done: true },
