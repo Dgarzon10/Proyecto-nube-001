@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Taks from './Components/Taks';
-
-
+import React, { useState } from "react";
+import Tasks from "./components/Tasks";
+import ButtonAdd from "./components/buttons/ButtonAdd";
+import { useEffect } from "react";
 
 const Home = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,31 +17,54 @@ const Home = () => {
     //   },
     //   body: JSON.stringify({ name, email }),
     // });
-    const res = await fetch('http://localhost:3001/');
+    const res = await fetch("http://localhost:3001/");
 
     if (res.ok) {
       // const data = await response.json();
-      
-        console.log("FUNCIONA");
+
+      console.log("FUNCIONA");
     }
   };
+  // const [tasks, setTasks] = useState([])
+  const tasks = [
+    { id: 1, content: "tender la cama", done: false },
+    { id: 2, content: "tender la cama", done: true },
+    { id: 3, content: "tender la cama", done: false },
+    { id: 4, content: "tender la cama", done: true },
+    { id: 5, content: "tender la cama", done: false },
+    { id: 6, content: "tender la cama", done: false },
+    { id: 7, content: "tender la cama", done: false },
+  ];
 
+  // useEffect();
   return (
-    <div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
-	<div class="bg-white  rounded-lg shadow-lg p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
-        <div class="mb-4">
-            <h1 class="text-grey-darkest font-bold text-3xl">Todo List</h1>
-            <div class="flex mt-4">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" placeholder="Add Todo"/>
-                <button class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal-500" onClick={handleSubmit}>Add</button>
-            </div>
+    <div className=" w-full flex justify-center font-sans">
+      <div className="bg-white h-full rounded-lg shadow-lg p-6 m-4 w-full md:w-1/2 lg:w-2/5">
+        <div className="">
+          <h1 className="font-bold mb-5 text-4xl text-center">Todo List</h1>
+          <div className="flex">
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 mr-4"
+              placeholder="Ex: Do the dishes..."
+            />
+            <ButtonAdd />
+            {/* <button
+              className="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal-500"
+              onClick={handleSubmit}
+            >
+              Add
+            </button> */}
+          </div>
         </div>
-        <div>
-          <Taks/>
-          <Taks/> 
+        <div className="flex flex-col overflow-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 mt-5 h-72">
+          {tasks.map((task) => (
+            <Tasks key={task.id} done={task.done} id={task.id}>
+              {task.content}
+            </Tasks>
+          ))}
         </div>
+      </div>
     </div>
-</div>
   );
 };
 
