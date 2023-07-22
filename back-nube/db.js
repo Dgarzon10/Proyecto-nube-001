@@ -3,7 +3,7 @@ const { Pool } = require("pg");
 
 const pool = new Pool({
   user: "dbadmin",
-  host: "ec2-54-152-82-3.compute-1.amazonaws.com",
+  host: "ec2-3-86-247-73.compute-1.amazonaws.com",
   database: "tododatabase",
   password: "dbadmin7",
   port: 5432, // Puerto predeterminado de PostgreSQL

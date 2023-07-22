@@ -1,6 +1,7 @@
-const ButtonAdd = ({ content }) => {
+const ButtonAdd = ({ content, url }) => {
   const handleSubmit = async (content) => {
-    const response = await fetch(`http://localhost:3001/${content}`, {
+    console.log(url + content);
+    const response = await fetch(url + content, {
       method: "POST",
     });
     if (response.ok) {

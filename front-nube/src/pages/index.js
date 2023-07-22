@@ -6,10 +6,10 @@ import { useEffect } from "react";
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [content, setContent] = useState("");
-
+  const url = "http://localhost:3001/";
   useEffect(() => {
     const getTasks = async () => {
-      const response = await fetch("http://localhost:3001/");
+      const response = await fetch(url);
       if (response.ok) {
         setTasks(await response.json());
       }
@@ -28,18 +28,12 @@ const Home = () => {
               placeholder="Ex: Do the dishes..."
               onChange={(e) => setContent(e.target.value)}
             />
-            <ButtonAdd content={content} />
-            {/* <button
-              className="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal-500"
-              onClick={handleSubmit}
-            >
-              Add
-            </button> */}
+            <ButtonAdd content={content} url={url} />
           </div>
         </div>
         <div className="flex flex-col overflow-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 mt-5 h-72">
           {tasks.map((task) => (
-            <Tasks key={task.id} done={task.done} id={task.id}>
+            <Tasks key={task.id} url={url} done={task.done} id={task.id}>
               {task.content}
             </Tasks>
           ))}

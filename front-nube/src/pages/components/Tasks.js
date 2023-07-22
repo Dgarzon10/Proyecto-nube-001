@@ -2,9 +2,9 @@ import { useState } from "react";
 import ButtonDone from "./buttons/ButtonDone";
 import ButtonRemove from "./buttons/ButtonRemove";
 useState;
-const Tasks = ({ children, done = false, id }) => {
+const Tasks = ({ children, done = false, id, url }) => {
   const taskDone = async (id) => {
-    const response = await fetch(`http://localhost:3001/${id}`, {
+    const response = await fetch(url + id, {
       method: "PUT",
     });
     if (response.ok) {
@@ -13,7 +13,7 @@ const Tasks = ({ children, done = false, id }) => {
   };
 
   const removeTask = async (id) => {
-    const response = await fetch(`http://localhost:3001/${id}`, {
+    const response = await fetch(url + id, {
       method: "DELETE",
     });
     if (response.ok) {
